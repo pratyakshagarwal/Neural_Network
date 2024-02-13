@@ -1,0 +1,12 @@
+setup.py
+Explortory_data_utils/Eda_utils.py
+Explortory_data_utils/Edv_utils.py
+Explortory_data_utils/__init__.py
+model_for_churn_dataset/__init__.py
+model_for_churn_dataset/data_preprocessing.py
+model_for_churn_dataset/model.py
+model_for_churn_dataset/train.py
+pratyaksh.egg-info/PKG-INFO
+pratyaksh.egg-info/SOURCES.txt
+pratyaksh.egg-info/dependency_links.txt
+pratyaksh.egg-info/top_level.txt
