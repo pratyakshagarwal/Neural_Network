@@ -8,7 +8,7 @@ from keras.layers import Dense, Dropout, BatchNormalization
 from keras.initializers import glorot_uniform
 
 class SimpleNeuralNetwork:
-    def __init__(self, input_size, hidden_size0, hidden_size1, hidden_size2, output_size):
+    def __init__(self, input_size, hidden_size0, hidden_size1, hidden_size2, output_size, dropout_rate=None):
         # Define the architecture of the neural network
         self.model = Sequential([
             Dense(hidden_size0, input_dim=input_size, activation='relu', kernel_initializer=glorot_uniform()),
@@ -51,6 +51,9 @@ class SimpleNeuralNetwork:
 
     def get_summary(self):
         self.model.summary()
+
+    def save_model(self, model_name):
+        self.model.save(model_name)
 
 # Example usage
 if __name__ == "__main__":
