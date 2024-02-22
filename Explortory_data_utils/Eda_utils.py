@@ -54,20 +54,6 @@ def Correlation_in_dataset(data):
 
     return correlation_dataset
 
-# Convert the categorial data of dataset into numeric data
-def Categorial_to_num(data):
-    for col in data.columns:
-        if pd.api.types.is_numeric_dtype(data[col]):
-            continue
-        else:
-            try:
-                tokenizer = Tokenizer()
-                tokenizer.fit_on_texts(data[col])
-
-                data[col] = data[col].apply(lambda x: tokenizer.texts_to_sequences([x])[0][0] if x is not None else None)
-            except Exception as e:
-                print(e)
-
 
 # measure Heteroscedasticity through statsmodels take a formula as an argument which is nothing more than a two columns
 def Heteroscedasticity(data, formula):
