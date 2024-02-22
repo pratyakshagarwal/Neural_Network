@@ -1,0 +1,2 @@
+Timestamp,Dense_Layers,Dropout_Rate,Perceptrons,Normalization_Used,Activation,Kernel_Initializer,Loss,Optimizer,Batch_Size,Epochs
+2024-02-22 16:55:44,2,0.2,"[32, 64, 128]",BatchNormalization,relu,glorot_uniform,binary_crossentropy,adam,32,10

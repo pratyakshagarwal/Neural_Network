@@ -13,30 +13,39 @@ class SimpleNeuralNetwork:
         self.model = Sequential([
             Dense(hidden_size0, input_dim=input_size, activation='relu', kernel_initializer=glorot_uniform()),
             BatchNormalization(),
-            Dropout(0.3),
+            Dropout(dropout_rate if dropout_rate is not None else 0.3),
 
             Dense(hidden_size1, activation='relu', kernel_initializer=glorot_uniform()),
             BatchNormalization(),
-            Dropout(0.2),
+            Dropout(dropout_rate if dropout_rate is not None else 0.2),
 
             Dense(hidden_size2, activation='relu', kernel_initializer=glorot_uniform()),
             BatchNormalization(),
-            Dropout(0.1),
+            Dropout(dropout_rate if dropout_rate is not None else 0.3),
 
-            Dense(output_size, activation='softmax')
+            Dense(output_size, activation='sigmoid')
         ])
 
         # Compile the model
-        self.model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+        self.model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['binary_accuracy'])
 
-    def train(self, X_train, y_train, X_val, y_val, epochs=10, batch_size=32):
+    def train(self, X_train, y_train, X_val=None, y_val=None, epochs=10, batch_size=32):
         # Define callbacks
         checkpoint = ModelCheckpoint("model_checkpoint.h5", save_best_only=True)
         early_stopping = EarlyStopping(patience=3, restore_best_weights=True)
         tensorboard = TensorBoard(log_dir='./logs', histogram_freq=1)
 
         # Train the model with callbacks
-        self.model.fit(
+        if (X_val is None and y_val is None):
+            self.model.fit(
+            X_train, y_train,
+            epochs=epochs,
+            batch_size=batch_size,
+            validation_split=0.2,
+            callbacks=[checkpoint, early_stopping, tensorboard]
+        )
+        else :
+            self.model.fit(
             X_train, y_train,
             epochs=epochs,
             batch_size=batch_size,
@@ -50,7 +59,7 @@ class SimpleNeuralNetwork:
         print(f"Test Loss: {loss:.4f}, Test Accuracy: {accuracy:.4f}")
 
     def get_summary(self):
-        self.model.summary()
+        return self.model.summary()
 
     def save_model(self, model_name):
         self.model.save(model_name)
