@@ -1,3 +1,4 @@
+import ast
 import pandas as pd
 from datetime import datetime
 
@@ -57,7 +58,10 @@ class Config:
         print(f"Configurations saved to {filename}")
 
     def get_config(self, parameter_value, file_name='configurations.csv'):
-        df = pd.read_csv("configurations.csv")
+        df = pd.read_csv(file_name)  # Use the provided file_name parameter
+        # Convert the string representation of the list to an actual list
+        df['Perceptrons'] = df['Perceptrons'].apply(ast.literal_eval)
+
         return df[parameter_value]
 
 # Create an instance of the Config class
