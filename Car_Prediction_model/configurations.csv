@@ -1,0 +1,2 @@
+Timestamp,Dense_Layers,Dropout_Rate,Perceptrons,Normalization_Used,Activation,Kernel_Initializer,Loss,Optimizer,Batch_Size,Epochs
+2024-04-01 22:16:24,2,"[0.0, 0.0, 0.0]","[128, 256]",BatchNormalization,relu,he_uniform,mean_absolute_error,<keras.src.optimizers.adam.Adam object at 0x000002925D127150>,8,30
